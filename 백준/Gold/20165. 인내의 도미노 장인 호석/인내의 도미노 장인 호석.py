@@ -9,6 +9,8 @@
 '''
 '''
 구현!
+이해가 안되네 대체 어디에서 틀리는거지??
+끊기는 부분에서도 못가는거 잘되는데 왜 이러는지 모르겠다 하
 '''
 
 
@@ -16,16 +18,36 @@ def drop(x, y, d, h):
     global score
     di, dj = command_direction[d]
 
-    for i in range(1, h):
-        nx = x + (di * i)
-        ny = y + (dj * i)
+    lets_go = h
+    moved = 1
+
+    while lets_go != moved:
+        nx = x + (di * moved)
+        ny = y + (dj * moved)
 
         if 0 <= nx < N and 0 <= ny < M:
             if up_down[nx][ny] == 'S':
                 up_down[nx][ny] = 'F'
                 score += 1
-                if board[nx][ny] > 1 and i + board[nx][ny] > height-1:
-                    drop(nx, ny, d, board[nx][ny])
+
+                if moved + board[nx][ny] > lets_go:
+                    lets_go = moved + board[nx][ny]
+
+        else:
+            return
+
+        moved += 1
+    # for i in range(1, h):
+    #     nx = x + (di * i)
+    #     ny = y + (dj * i)
+    #
+    #     if 0 <= nx < N and 0 <= ny < M:
+    #         if up_down[nx][ny] == 'S':
+    #             up_down[nx][ny] = 'F'
+    #             score += 1
+    #             if board[nx][ny] > 1 and i + board[nx][ny] > height-1:
+    #                 drop(nx, ny, d, board[nx][ny])
+    #                 return
 
 
 # N = 세로 길이, M = 가로 길이, R = 라운드 수
