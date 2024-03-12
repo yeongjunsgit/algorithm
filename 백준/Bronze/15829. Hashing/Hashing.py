@@ -12,4 +12,4 @@ for i in range(L):
     tmp = alpha[word[i]] * (31 ** i)
     result += tmp
 
-print(result)
+print(result % 1234567891)
