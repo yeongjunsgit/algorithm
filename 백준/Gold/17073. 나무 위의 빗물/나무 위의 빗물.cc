@@ -14,22 +14,33 @@ int main()
     double water;
     cin >> N >> water;
     
-    vector<vector<int>> graph(N+1);
+    double leaf_node = 0.0;
+    
+    bool isleaf[N+1]{false};
+    bool counted[N+1]{false};
     
     for (int i=1; i<N; ++i) {
         int s, e;
         cin >> s >> e;
         
-        graph[s].push_back(e);
-        graph[e].push_back(s);
-    }
-    
-    double leaf_node = 0.0;
-    
-    for (int i=2; i<=N; ++i) {
-        if (graph[i].size() == 1) {
-            leaf_node += 1.0;
+        if (isleaf[s] == false && counted[s] == false && s != 1) {
+            isleaf[s] = true;
+            leaf_node += 1;
         }
+        else if (isleaf[s] == true && counted[s] == false && s != 1) {
+            leaf_node -= 1;
+            counted[s] = true;
+        }
+        
+        if (isleaf[e] == false && counted[e] == false && e != 1) {
+            leaf_node += 1;
+            isleaf[e] = true;
+        }
+        else if (isleaf[e] == true && counted[e] == false && e != 1) {
+            leaf_node -= 1;
+            counted[e] = true;
+        }
+
     }
     
     double result = round((water / leaf_node) * 1e10) / 1e10;
