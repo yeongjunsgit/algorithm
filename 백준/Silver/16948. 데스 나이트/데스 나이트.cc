@@ -10,13 +10,11 @@ int main()
     int N;
     cin >> N;
     
-    vector<vector<int>> board(N, vector<int>(N, 0));
     vector<vector<int>> visited(N, vector<int>(N, 0));
     
     int sx, sy, ex, ey;
     cin >> sx >> sy >> ex >> ey;
     
-    board[sx][sy] = 1;
     visited[sx][sy] = 1;
     
     queue<pair<int, int>> que;
