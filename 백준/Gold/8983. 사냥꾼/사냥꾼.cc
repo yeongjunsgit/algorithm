@@ -3,6 +3,7 @@
 #include <vector>
 #include <map>
 #include <cmath>
+#include <algorithm>
 
 using namespace std;
 
@@ -27,6 +28,8 @@ int main()
         shoot_area.push_back(num);
     }
     
+    sort(shoot_area.begin(), shoot_area.end());
+    
     // vector<pair<int, int>> animals;
     // map<pair<int, int>, bool> hunted;
     int result = 0;
@@ -38,16 +41,47 @@ int main()
         // animals.push_back({s, e});
         // hunted.insert({{s, e}, false});
         
-        for (int i=0; i<M; ++i) {
-            pair<int, int> now_base = {shoot_area[i], 0};
-            int x_range = abs(now_base.first - s); 
-            int y_range = abs(now_base.second - e); 
-            
-            if (L >= x_range + y_range) {
-                result += 1;
-                break;
+        int start = 0;
+        int end = M-1;
+        int mid;
+        bool is_ok = false;
+        long long gap = 1000000001;
+        
+        while (start <= end) {
+            mid = (start + end) / 2;
+            if (shoot_area[mid] == s) {
+                if (e <= L) {
+                    result += 1;
+                    is_ok = true;
+                    break;
+                }
+                else {
+                    break;
+                }
             }
             
+            else if (shoot_area[mid] > s){
+                end = mid -1;
+                if (gap > abs(shoot_area[mid] - s)) {
+                    gap = abs(shoot_area[mid] - s);
+                }
+            }
+            
+            else if (shoot_area[mid] < s){
+                start = mid + 1;
+                if (gap > abs(shoot_area[mid] - s)) {
+                    gap = abs(shoot_area[mid] - s);
+                }
+            }
+        }
+        
+        if (is_ok == false) {
+                if (gap > abs(shoot_area[start] - s)) {
+                    gap = abs(shoot_area[start] - s);
+                }
+            if (L >= gap + e) {
+                result += 1;
+            }
         }
     }
     
@@ -55,3 +89,4 @@ int main()
 
     return 0;
 }
+
