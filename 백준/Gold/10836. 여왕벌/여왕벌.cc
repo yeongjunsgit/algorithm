@@ -13,56 +13,30 @@ int main()
     
     vector<vector<int>> worms(M, vector<int>(M, 1));
     
-    vector<int> row_stack(M, 0);
+    vector<int> row_stack(2*M-1, 0);
     
     for (int i=0; i<N; ++i) {
         int zero, one, two;
         cin >> zero >> one >> two;
         
-        pair<int, int> loca = {M, 0};
-        int progressing = 0;
-        
-        for (int i=0; i<zero; ++i) {
-            progressing += 1;
-            if (loca.first != 0) {
-                loca.first -= 1;
-            }
-            else {
-                loca.second += 1;
-            }
+        for (int i=zero; i<zero+one; ++i) {
+            row_stack[i] += 1;
         }
         
-        for (int i=0; i<one; ++i) {
-            progressing += 1;
-            if (loca.first != 0) {
-                loca.first -= 1;
-            }
-            else {
-                loca.second += 1;
-            }
-            
-            worms[loca.first][loca.second] += 1;
-            
-            if (progressing > M) {
-                row_stack[loca.second] += 1;
-            }
+        for (int i=zero+one; i<zero+one+two; ++i) {
+            row_stack[i] += 2;
         }
-        
-        for (int i=0; i<two; ++i) {
-            progressing += 1;
-            if (loca.first != 0) {
-                loca.first -= 1;
-            }
-            else {
-                loca.second += 1;
-            }
-            
-            worms[loca.first][loca.second] += 2;
-            
-            if (progressing > M) {
-                row_stack[loca.second] += 2;
-            }
+    }
+    
+    pair<int, int> loca = {M, 0};
+    for (int i=0; i<2*M; ++i) {
+        if (loca.first > 0) {
+            loca.first -= 1;
         }
+        else {
+            loca.second += 1;
+        }
+        worms[loca.first][loca.second] += row_stack[i];
     }
     
     for (int i=0; i<M; ++i) {
@@ -71,7 +45,7 @@ int main()
                 cout << worms[i][j] << " ";
             }
             else {
-                cout << worms[i][j] + row_stack[j] << " ";
+                cout << worms[i][j] + worms[0][j] - 1 << " ";
             }
         }
         cout << "\n";
