@@ -17,7 +17,7 @@ int main()
     cin >> N >> K;
     
     priority_queue<pair<int, int>, vector<pair<int, int>>, Compare> que;
-    vector<pair<int, int>> visited(1000001, {999999, 0});
+    vector<pair<int, int>> visited(200001, {999999, 0});
     
     visited[N] = {0, 1};
     que.push({0, N});
