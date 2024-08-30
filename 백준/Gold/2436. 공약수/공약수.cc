@@ -55,9 +55,6 @@ int main()
             }
         }
         x++;
-        if (x > sqrt(N * M)) {
-            break;
-        }
     }
     
     cout << one << " " << two; 
