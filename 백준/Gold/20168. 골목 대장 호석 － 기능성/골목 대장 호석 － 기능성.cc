@@ -23,6 +23,8 @@ void bfs()
 {
     int result = 10001;
     priority_queue<my_node, vector<my_node>, Compare> que;
+    vector<int> visited(N+1, 10001);
+    visited[A] = 0;
     que.push({C, A, 0});
     
     while (!que.empty()) {
@@ -36,11 +38,14 @@ void bfs()
             if (now.left_money - a.first >= 0) {
                 int next_money = now.left_money - a.first;
                 int next_power = max(now.max_power, a.first);
-                if (a.second == B) {
-                    result = min(result, next_power);
-                }
-                else {
-                    que.push({next_money, a.second, next_power});
+                if (visited[a.second] > next_power) {
+                    visited[a.second] = next_power;
+                    if (a.second == B) {
+                        result = min(result, next_power);
+                    }
+                    else {
+                        que.push({next_money, a.second, next_power});
+                    }
                 }
             }
         }
@@ -69,6 +74,7 @@ int main()
     for (int i=0; i<M; ++i) {
         cin >> s >> e >> dist;
         graph[s].push_back({dist, e});
+        graph[e].push_back({dist, s});
     }
     
     bfs();
