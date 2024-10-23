@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <unordered_map>
+#include <algorithm>
 
 using namespace std;
 
@@ -21,10 +22,14 @@ void union_root(int a, int b)
     int a_root = find_root(a);
     int b_root = find_root(b);
     
-    if (a_root != b_root) {
-        parents[a_root] = b_root;
-        childs_time[b_root] += childs_time[a_root];
+    if (a_root == b_root) {
+        return;
     }
+    if (a_root < b_root) {
+        swap(a_root, b_root);
+    }
+    parents[a_root] = b_root;
+    childs_time[b_root] += childs_time[a_root];
     
     return;
 }
