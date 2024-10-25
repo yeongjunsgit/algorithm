@@ -51,14 +51,7 @@ void result_p()
             blue_team.push(i);
         }
     }
-    
-    if (blue == 0) {
-        blue++;
-        int tmp = red_team.top();
-        red_team.pop();
-        blue_team.push(tmp);
-    }
-    
+
     cout << red << "\n";
     while (!red_team.empty()) {
         cout << red_team.top() << " ";
