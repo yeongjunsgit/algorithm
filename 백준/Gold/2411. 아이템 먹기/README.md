@@ -18,7 +18,7 @@
 
 <p>N×M 모양의 맵에 아이템과 장애물이 있다. 이때 맵의 왼쪽 아래에서 출발하여 오른쪽 위로 가려고 하는데, 중간에 모든 아이템을 먹으려고 한다. 이동할 때에는 오른쪽이나 위쪽으로만 이동할 수 있다. 또, 장애물이 있는 곳으로는 지날 수 없다.</p>
 
-<p style="text-align: center;"><img alt="" src="https://www.acmicpc.net/JudgeOnline/upload/201103/Screen%20shot%202011-03-13%20at%205_27_27%20PM.png" style="height:132px; width:310px"></p>
+<p style="text-align: center;"><img alt="" src="" style="height:132px; width:310px"></p>
 
 <p>이때, 이동하는 경로의 개수가 총 몇 개인지 알아내는 프로그램을 작성하시오. 위의 예에서 ◎은 장애물, ☆는 아이템이다. 이때 경우의 수는 4 가지가 된다.</p>
 
