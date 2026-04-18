@@ -1,0 +1,16 @@
+SELECT ID, 
+       CASE
+        WHEN TYPE = 1 THEN 'CRITICAL'
+        WHEN TYPE = 2 THEN 'HIGH'
+        WHEN TYPE = 3 THEN 'MEDIUM'
+        ELSE 'LOW'
+       END AS COLONY_NAME
+        
+FROM (
+    SELECT
+    ID,
+    NTILE(4) OVER(ORDER BY SIZE_OF_COLONY DESC) AS TYPE 
+    FROM ECOLI_DATA
+) AS WOW
+        
+ORDER BY ID
