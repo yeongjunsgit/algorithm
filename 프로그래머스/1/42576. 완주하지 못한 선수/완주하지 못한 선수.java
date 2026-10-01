@@ -10,7 +10,7 @@ class Solution {
         }
         
         for (String s : participant) {
-            if (goalIn.getOrDefault(s, -1) == -1 || goalIn.get(s) == 0) {
+            if (goalIn.getOrDefault(s, 0) == 0) {
                 answer = s;
                 break;
             }
